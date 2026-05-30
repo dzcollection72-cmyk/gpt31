@@ -973,15 +973,14 @@
   </nav>
   <div class="dash-layout">
     <div class="sidebar" id="sidebar">
-      <!-- MODIFIED: added closeSidebar() call so sidebar auto-closes after selecting a tab on mobile -->
-      <div class="sidebar-item active" onclick="showDashTab('overview');closeSidebar()" data-tab="overview"><span class="icon">🏠</span>Dashboard</div>
-      <div class="sidebar-item" onclick="showDashTab('plans');closeSidebar()" data-tab="plans"><span class="icon">📊</span>Investment Plans</div>
-      <div class="sidebar-item" onclick="showDashTab('earnings');closeSidebar()" data-tab="earnings"><span class="icon">💰</span>My Earnings</div>
-      <div class="sidebar-item" onclick="showDashTab('withdrawal');closeSidebar()" data-tab="withdrawal"><span class="icon">💸</span>Withdrawal</div>
-      <div class="sidebar-item" onclick="showDashTab('history');closeSidebar()" data-tab="history"><span class="icon">📋</span>History</div>
-      <div class="sidebar-item" onclick="showDashTab('referral');closeSidebar()" data-tab="referral"><span class="icon">🎁</span>Referral</div>
+      <div class="sidebar-item active" onclick="showDashTab('overview')" data-tab="overview"><span class="icon">🏠</span>Dashboard</div>
+      <div class="sidebar-item" onclick="showDashTab('plans')" data-tab="plans"><span class="icon">📊</span>Investment Plans</div>
+      <div class="sidebar-item" onclick="showDashTab('earnings')" data-tab="earnings"><span class="icon">💰</span>My Earnings</div>
+      <div class="sidebar-item" onclick="showDashTab('withdrawal')" data-tab="withdrawal"><span class="icon">💸</span>Withdrawal</div>
+      <div class="sidebar-item" onclick="showDashTab('history')" data-tab="history"><span class="icon">📋</span>History</div>
+      <div class="sidebar-item" onclick="showDashTab('referral')" data-tab="referral"><span class="icon">🎁</span>Referral</div>
       <div class="sidebar-divider"></div>
-      <div class="sidebar-item" onclick="showDashTab('profile');closeSidebar()" data-tab="profile"><span class="icon">👤</span>Profile</div>
+      <div class="sidebar-item" onclick="showDashTab('profile')" data-tab="profile"><span class="icon">👤</span>Profile</div>
       <div class="sidebar-item" onclick="doLogout()"><span class="icon">🚪</span>Logout</div>
     </div>
     <div class="dash-content">
@@ -1191,11 +1190,10 @@
   </nav>
   <div class="dash-layout">
     <div class="sidebar" id="adminSidebar">
-      <!-- MODIFIED: close sidebar after tab selection on mobile -->
-      <div class="sidebar-item active" onclick="showAdminTab('overview');closeSidebar()" data-tab="overview"><span class="icon">📊</span>Overview</div>
-      <div class="sidebar-item" onclick="showAdminTab('users');closeSidebar()" data-tab="users"><span class="icon">👥</span>Users</div>
-      <div class="sidebar-item" onclick="showAdminTab('deposits');closeSidebar()" data-tab="deposits"><span class="icon">💳</span>Deposits</div>
-      <div class="sidebar-item" onclick="showAdminTab('withdrawals');closeSidebar()" data-tab="withdrawals"><span class="icon">💸</span>Withdrawals</div>
+      <div class="sidebar-item active" onclick="showAdminTab('overview')" data-tab="overview"><span class="icon">📊</span>Overview</div>
+      <div class="sidebar-item" onclick="showAdminTab('users')" data-tab="users"><span class="icon">👥</span>Users</div>
+      <div class="sidebar-item" onclick="showAdminTab('deposits')" data-tab="deposits"><span class="icon">💳</span>Deposits</div>
+      <div class="sidebar-item" onclick="showAdminTab('withdrawals')" data-tab="withdrawals"><span class="icon">💸</span>Withdrawals</div>
     </div>
     <div class="dash-content">
       <div id="admin-tab-overview" class="admin-tab">
@@ -2031,18 +2029,35 @@ function buildDashPlans(){
 }
 
 function showDashTab(tab){
+  // پہلے سارے tabs چھپائیں
   document.querySelectorAll('.dash-tab').forEach(t=>t.style.display='none');
+  // سارے sidebar active states ہٹائیں
   document.querySelectorAll('.sidebar-item[data-tab]').forEach(t=>t.classList.remove('active'));
-  const tabEl=document.getElementById('tab-'+tab);
-  if(tabEl) tabEl.style.display='block';
-  const sideEl=document.querySelector(`.sidebar-item[data-tab="${tab}"]`);
+
+  // مطلوبہ tab دکھائیں
+  const tabEl = document.getElementById('tab-'+tab);
+  if(tabEl){
+    tabEl.style.display = 'block';
+    // scroll to top of content on mobile
+    if(window.innerWidth<=768){
+      tabEl.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+  // sidebar میں active class لگائیں
+  const sideEl = document.querySelector('.sidebar-item[data-tab="'+tab+'"]');
   if(sideEl) sideEl.classList.add('active');
+
+  // tab-specific functions
   if(tab==='withdrawal') renderSavedNums();
   if(tab==='earnings') renderLiveEarningsCards();
-  else{if(liveEarningRaf){cancelAnimationFrame(liveEarningRaf);liveEarningRaf=null;}}
+  else{ if(liveEarningRaf){ cancelAnimationFrame(liveEarningRaf); liveEarningRaf=null; } }
   if(tab==='referral') renderReferralTab();
-  // Auto-close sidebar on mobile after navigation
-  if(window.innerWidth<=768) closeSidebar();
+
+  // Mobile پر sidebar بند کریں — tab render ہونے کے بعد (50ms delay)
+  if(window.innerWidth<=768){
+    setTimeout(()=>{ closeSidebar(); }, 50);
+  }
 }
 
 // ══════════════════════════════════════════
@@ -2222,14 +2237,22 @@ function loadAdminDash(){refreshAdminStats();showAdminTab('overview');}
 function showAdminTab(tab){
   document.querySelectorAll('.admin-tab').forEach(t=>t.style.display='none');
   document.querySelectorAll('#adminSidebar .sidebar-item[data-tab]').forEach(t=>t.classList.remove('active'));
-  document.getElementById('admin-tab-'+tab).style.display='block';
-  document.querySelector(`#adminSidebar .sidebar-item[data-tab="${tab}"]`)?.classList.add('active');
+
+  const tabEl = document.getElementById('admin-tab-'+tab);
+  if(tabEl) tabEl.style.display='block';
+
+  const sideEl = document.querySelector('#adminSidebar .sidebar-item[data-tab="'+tab+'"]');
+  if(sideEl) sideEl.classList.add('active');
+
   refreshAdminStats();
   if(tab==='users') renderAdminUsers();
   if(tab==='deposits') renderAdminDeposits();
   if(tab==='withdrawals') renderAdminWithdrawals();
-  // Auto-close sidebar on mobile after navigation
-  if(window.innerWidth<=768) closeSidebar();
+
+  // Mobile پر sidebar بند کریں
+  if(window.innerWidth<=768){
+    setTimeout(()=>{ closeSidebar(); }, 50);
+  }
 }
 function refreshAdminStats(){
   const users=Object.keys(db.users).filter(k=>!db.users[k].isAdmin);
@@ -2428,8 +2451,9 @@ function closeSidebar(){
     const el=document.getElementById(id);
     if(el) el.classList.remove('active');
   });
-  // Re-enable body scroll
+  // body scroll واپس enable کریں
   document.body.style.overflow='';
+  document.body.style.position='';
 }
 
 function toggleDashSidebar(){
@@ -2439,15 +2463,12 @@ function toggleDashSidebar(){
   const ov=document.getElementById('sidebarOverlay');
   const btn=document.getElementById('dashHamburger');
   if(isOpen){
-    sb.classList.remove('open');
-    if(ov) ov.classList.remove('show');
-    if(btn) btn.classList.remove('active');
-    document.body.style.overflow='';
+    closeSidebar();
   } else {
     sb.classList.add('open');
     if(ov) ov.classList.add('show');
     if(btn) btn.classList.add('active');
-    // Prevent background scroll when sidebar is open
+    // sidebar کھلنے پر پیچھے scroll نہ ہو
     document.body.style.overflow='hidden';
   }
 }
@@ -2459,10 +2480,7 @@ function toggleAdminSidebar(){
   const ov=document.getElementById('sidebarOverlay');
   const btn=document.getElementById('adminHamburger');
   if(isOpen){
-    sb.classList.remove('open');
-    if(ov) ov.classList.remove('show');
-    if(btn) btn.classList.remove('active');
-    document.body.style.overflow='';
+    closeSidebar();
   } else {
     sb.classList.add('open');
     if(ov) ov.classList.add('show');
