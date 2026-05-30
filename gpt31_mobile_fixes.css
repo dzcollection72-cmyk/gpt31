@@ -1,0 +1,100 @@
+/* ═══════════════════════════════════════════════════════
+   GPT31 MOBILE FIXES v2.0
+   
+   PASTE THIS CSS BEFORE </style> IN YOUR HTML FILE
+   
+   FIX 1+2: Sidebar overlay - now lighter + items clickable
+   FIX 3: Hamburger button - gold color with animated pulse  
+   FIX 4: GPT31 logo - perfectly centered on mobile
+══════════════════════════════════════════════════════ */
+
+/* FIX 1+2: SIDEBAR OVERLAY */
+.sidebar-overlay {
+  display: none !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,0.42) !important;   /* پہلے 0.65 تھا — اب ہلکا */
+  z-index: 99997 !important;                 /* پہلے 99998 تھا — sidebar items اب کلک ہوں گے */
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.sidebar-overlay.show {
+  display: block !important;
+}
+
+/* FIX 3: HAMBURGER BUTTON — GOLD + ANIMATED */
+.dash-hamburger {
+  display: none !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  cursor: pointer !important;
+  padding: 10px 8px !important;
+  flex-shrink: 0 !important;
+  background: rgba(240,180,41,0.15) !important;   /* gold background */
+  border-radius: 8px !important;
+  border: 1.5px solid rgba(240,180,41,0.55) !important;  /* gold border */
+  min-width: 44px !important;
+  min-height: 44px !important;
+  align-items: center !important;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: background .25s, border-color .25s, box-shadow .25s !important;
+  animation: gpHamPulse 2.5s ease-in-out infinite !important;  /* pulse animation */
+}
+.dash-hamburger:hover,
+.dash-hamburger:active {
+  background: rgba(240,180,41,0.30) !important;
+  border-color: #F0B429 !important;
+  box-shadow: 0 0 14px rgba(240,180,41,0.45) !important;
+}
+.dash-hamburger span {
+  display: block !important;
+  width: 20px !important;
+  height: 2.5px !important;
+  background: #F0B429 !important;  /* gold color lines */
+  border-radius: 2px !important;
+  transition: all .32s cubic-bezier(.4,0,.2,1) !important;
+}
+.dash-hamburger.active {
+  background: rgba(240,180,41,0.25) !important;
+  border-color: #F0B429 !important;
+  animation: none !important;
+  box-shadow: 0 0 10px rgba(240,180,41,0.35) !important;
+}
+.dash-hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg) !important;
+}
+.dash-hamburger.active span:nth-child(2) {
+  opacity: 0 !important;
+  transform: scaleX(0) !important;
+}
+.dash-hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg) !important;
+}
+
+/* Pulse Animation Keyframes */
+@keyframes gpHamPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(240,180,41,0); }
+  50%       { box-shadow: 0 0 0 6px rgba(240,180,41,0.2); }
+}
+
+/* FIX 4: LOGO CENTERED ON MOBILE */
+@media(max-width: 768px) {
+  .dash-hamburger {
+    display: flex !important;
+  }
+  #page-dashboard nav,
+  #page-admin nav {
+    position: relative !important;
+  }
+  #page-dashboard nav .logo,
+  #page-admin nav .logo {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    flex: none !important;
+    white-space: nowrap !important;
+  }
+}
