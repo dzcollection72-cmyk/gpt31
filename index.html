@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- FIXED: maximum-scale=1 prevents browser zoom from breaking layout; user-scalable=no stops pinch-zoom layout breaks -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GPT31 — Smart Investment Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -35,7 +36,7 @@
   .page.active{display:block}
 
   /* NAV */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:rgba(10,15,46,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:rgba(10,15,46,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);gap:12px}
   .logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.45rem;color:var(--gold);letter-spacing:-0.5px}
   .logo span{color:var(--teal)}
   .nav-links{display:flex;gap:28px;list-style:none}
@@ -340,7 +341,7 @@
   .about-card .ac-tag.purple{background:rgba(138,92,247,.1);color:#8A5CF7;border:1px solid rgba(138,92,247,.2)}
   .about-card .ac-tag.green{background:rgba(72,199,116,.1);color:#48C774;border:1px solid rgba(72,199,116,.2)}
   .about-card .ac-tag.orange{background:rgba(255,140,0,.1);color:#FF8C00;border:1px solid rgba(255,140,0,.2)}
-  .about-stats-row{display:flex;gap:0;margin:48px 0 0;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:rgba(19,26,69,.6);backdrop-filter:blur(12px)}
+  .about-stats-row{display:flex;gap:0;margin:48px 0 0;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:rgba(19,26,69,.6);backdrop-filter:blur(12px);flex-wrap:wrap}
   .about-stat{flex:1;padding:28px 20px;text-align:center;border-right:1px solid var(--border);transition:background .3s}
   .about-stat:last-child{border-right:none}
   .about-stat:hover{background:rgba(240,180,41,.05)}
@@ -353,22 +354,152 @@
     .about-cards{grid-template-columns:1fr}
   }
 
-  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-  .hamburger span{display:block;width:24px;height:2px;background:var(--gray);border-radius:2px}
+  /* ── HAMBURGER BUTTON ── */
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;z-index:200;flex-shrink:0}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--gray);border-radius:2px;transition:all .3s}
+  /* Hamburger animation when open */
+  .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .hamburger.active span:nth-child(2){opacity:0;transform:translateX(-10px)}
+  .hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
+  /* ── SIDEBAR OVERLAY (mobile backdrop) ── */
+  /* ADDED: Dark overlay behind sidebar on mobile so user can tap to close */
+  .sidebar-overlay{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:49;
+    backdrop-filter:blur(2px);
+  }
+  .sidebar-overlay.show{display:block}
+
+  /* ── MOBILE & TABLET BREAKPOINT ── */
   @media(max-width:768px){
+    /* NAV: hide links, show hamburger */
     nav{padding:14px 18px}
     .nav-links,.nav-btns{display:none}
     .hamburger{display:flex}
+
+    /* HERO: reduce padding to prevent overflow */
     .hero{padding:100px 18px 40px}
-    .section{padding:55px 18px}
-    .dash-content{margin-left:0;padding:18px}
-    .sidebar{transform:translateX(-100%)}
-    .sidebar.open{transform:translateX(0)}
-    .balance-card{flex-direction:column}
-    #live-notifs{width:240px}
-    #wa-btn{right:18px;bottom:18px}
+    .hero h1{font-size:clamp(1.8rem,7vw,2.8rem)}
+    .hero p{font-size:.93rem}
+    .stats-row{gap:20px;margin-top:36px}
+    .stat-val{font-size:1.4rem}
+
+    /* SECTIONS */
+    .section{padding:50px 16px}
+    .plans-grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr 1fr}
+    .about-cards{grid-template-columns:1fr}
+
+    /* DASHBOARD LAYOUT: sidebar slides in from left */
+    /* FIXED: sidebar hidden by default on mobile, slides in when .open is added */
+    .dash-content{margin-left:0;padding:16px;max-width:100%}
+    .sidebar{
+      transform:translateX(-100%); /* hidden off-screen */
+      z-index:50;
+      width:260px;
+    }
+    .sidebar.open{transform:translateX(0)} /* shown when toggled */
+
+    /* BALANCE CARD: stack vertically */
+    .balance-card{flex-direction:column;align-items:flex-start}
+    .balance-val{font-size:2rem}
+
+    /* STAT CARDS: 2 columns on mobile */
+    .cards-row{grid-template-columns:1fr 1fr}
+
+    /* TABLES: horizontal scroll on small screens */
+    /* FIXED: prevents table from breaking layout, adds scrollable container */
+    .panel{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .hist-table{min-width:520px}
+    .admin-table{min-width:700px}
+
+    /* MODAL: full-width on mobile */
+    .modal{padding:22px 18px;margin:10px}
+    .modal-plan-grid{grid-template-columns:1fr 1fr}
+
+    /* LIVE NOTIFICATIONS: smaller on mobile */
+    #live-notifs{width:220px;left:10px}
+
+    /* WHATSAPP: reposition to not overlap toast */
+    #wa-btn{right:14px;bottom:74px}
+    #toast{right:14px;bottom:14px;max-width:calc(100vw - 28px)}
+
+    /* WITHDRAWAL INFO GRID */
+    .wd-info-grid{grid-template-columns:1fr 1fr}
+
+    /* DASHBOARD PLAN CARDS */
+    .pro-plans-grid{grid-template-columns:1fr}
+    .dash-plans{grid-template-columns:1fr 1fr}
+
+    /* LIVE EARNINGS GRID */
+    .live-earnings-grid{grid-template-columns:1fr}
+
+    /* FOOTER */
+    footer{padding:30px 18px}
+
+    /* PREVENT horizontal scroll on body */
+    body{overflow-x:hidden}
+    .page{overflow-x:hidden}
+
+    /* DASHBOARD NAV on mobile: add hamburger */
+    #page-dashboard nav, #page-admin nav{
+      padding:12px 16px;
+    }
+    /* Show hamburger in dashboard/admin nav */
+    .dash-hamburger{
+      display:flex !important;
+    }
   }
+
+  /* ── SMALL MOBILE ── */
+  @media(max-width:480px){
+    .hero h1{font-size:1.7rem}
+    .steps{grid-template-columns:1fr}
+    .cards-row{grid-template-columns:1fr}
+    .balance-actions{flex-direction:row;flex-wrap:wrap;gap:8px}
+    .balance-actions .btn{flex:1;min-width:100px}
+    .stats-row{gap:16px}
+    .stat-val{font-size:1.2rem}
+    .auth-box{padding:26px 18px}
+    .modal-plan-grid{grid-template-columns:1fr}
+    .wd-info-grid{grid-template-columns:1fr}
+    .dash-plans{grid-template-columns:1fr}
+    .about-stats-row{flex-direction:column}
+    .about-stat{border-right:none;border-bottom:1px solid var(--border)}
+    .about-stat:last-child{border-bottom:none}
+    /* Tab font size */
+    .tab{font-size:.78rem;padding:8px 6px}
+    /* Notification even smaller */
+    #live-notifs{width:200px}
+    .lw-notif{padding:8px 10px}
+  }
+
+  /* ── TABLET ── */
+  @media(min-width:769px) and (max-width:1024px){
+    .section{padding:70px 28px}
+    .dash-content{margin-left:250px;padding:22px}
+    .cards-row{grid-template-columns:repeat(2,1fr)}
+    .pro-plans-grid{grid-template-columns:repeat(2,1fr)}
+    .live-earnings-grid{grid-template-columns:repeat(2,1fr)}
+  }
+
+  /* ── HAMBURGER CLASS for dashboard/admin pages ── */
+  /* ADDED: separate class so it can be shown in dash nav independently */
+  .dash-hamburger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    padding:6px;
+    flex-shrink:0;
+  }
+  .dash-hamburger span{display:block;width:24px;height:2px;background:var(--gray);border-radius:2px;transition:all .3s}
+  .dash-hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .dash-hamburger.active span:nth-child(2){opacity:0}
+  .dash-hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
   .progress-bar{height:5px;background:rgba(255,255,255,.09);border-radius:3px;overflow:hidden;margin-top:8px}
   .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--teal));border-radius:3px;transition:width 1s ease}
@@ -436,6 +567,9 @@
 </style>
 </head>
 <body>
+
+<!-- ADDED: Overlay backdrop for mobile sidebar - clicking it closes the sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
 <div id="loadingBar"></div>
 <canvas id="particles"></canvas>
@@ -666,6 +800,10 @@
 <!-- ══════ DASHBOARD ══════ -->
 <div id="page-dashboard" class="page">
   <nav>
+    <!-- ADDED: hamburger button for mobile sidebar toggle in dashboard -->
+    <div class="dash-hamburger" id="dashHamburger" onclick="toggleDashSidebar()">
+      <span></span><span></span><span></span>
+    </div>
     <div class="logo">GPT<span>31</span></div>
     <div style="display:flex;align-items:center;gap:13px">
       <span id="navUsername" style="color:var(--gray);font-size:.87rem"></span>
@@ -674,14 +812,15 @@
   </nav>
   <div class="dash-layout">
     <div class="sidebar" id="sidebar">
-      <div class="sidebar-item active" onclick="showDashTab('overview')" data-tab="overview"><span class="icon">🏠</span>Dashboard</div>
-      <div class="sidebar-item" onclick="showDashTab('plans')" data-tab="plans"><span class="icon">📊</span>Investment Plans</div>
-      <div class="sidebar-item" onclick="showDashTab('earnings')" data-tab="earnings"><span class="icon">💰</span>My Earnings</div>
-      <div class="sidebar-item" onclick="showDashTab('withdrawal')" data-tab="withdrawal"><span class="icon">💸</span>Withdrawal</div>
-      <div class="sidebar-item" onclick="showDashTab('history')" data-tab="history"><span class="icon">📋</span>History</div>
-      <div class="sidebar-item" onclick="showDashTab('referral')" data-tab="referral"><span class="icon">🎁</span>Referral</div>
+      <!-- MODIFIED: added closeSidebar() call so sidebar auto-closes after selecting a tab on mobile -->
+      <div class="sidebar-item active" onclick="showDashTab('overview');closeSidebar()" data-tab="overview"><span class="icon">🏠</span>Dashboard</div>
+      <div class="sidebar-item" onclick="showDashTab('plans');closeSidebar()" data-tab="plans"><span class="icon">📊</span>Investment Plans</div>
+      <div class="sidebar-item" onclick="showDashTab('earnings');closeSidebar()" data-tab="earnings"><span class="icon">💰</span>My Earnings</div>
+      <div class="sidebar-item" onclick="showDashTab('withdrawal');closeSidebar()" data-tab="withdrawal"><span class="icon">💸</span>Withdrawal</div>
+      <div class="sidebar-item" onclick="showDashTab('history');closeSidebar()" data-tab="history"><span class="icon">📋</span>History</div>
+      <div class="sidebar-item" onclick="showDashTab('referral');closeSidebar()" data-tab="referral"><span class="icon">🎁</span>Referral</div>
       <div class="sidebar-divider"></div>
-      <div class="sidebar-item" onclick="showDashTab('profile')" data-tab="profile"><span class="icon">👤</span>Profile</div>
+      <div class="sidebar-item" onclick="showDashTab('profile');closeSidebar()" data-tab="profile"><span class="icon">👤</span>Profile</div>
       <div class="sidebar-item" onclick="doLogout()"><span class="icon">🚪</span>Logout</div>
     </div>
     <div class="dash-content">
@@ -708,10 +847,13 @@
         </div>
         <div class="panel">
           <div class="panel-title">Recent Transactions <span class="ptag">Latest 5</span></div>
+          <!-- ADDED: scroll wrapper for mobile -->
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
           <table class="hist-table">
             <thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead>
             <tbody id="recentTxBody"><tr><td colspan="4" style="text-align:center;color:var(--gray);padding:22px">No transactions yet</td></tr></tbody>
           </table>
+          </div>
         </div>
       </div>
 
@@ -793,10 +935,13 @@
       <div id="tab-history" class="dash-tab" style="display:none">
         <h2 style="margin-bottom:22px;font-weight:700">Transaction History</h2>
         <div class="panel">
+          <!-- ADDED: scroll wrapper for mobile -->
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
           <table class="hist-table">
             <thead><tr><th>Date & Time</th><th>Type</th><th>Amount</th><th>Method</th><th>Status</th></tr></thead>
             <tbody id="histTableBody"><tr><td colspan="5" style="text-align:center;color:var(--gray);padding:22px">No transactions yet</td></tr></tbody>
           </table>
+          </div>
         </div>
       </div>
 
@@ -876,15 +1021,20 @@
 <!-- ══════ ADMIN PAGE ══════ -->
 <div id="page-admin" class="page">
   <nav>
+    <!-- ADDED: hamburger button for mobile sidebar toggle in admin -->
+    <div class="dash-hamburger" id="adminHamburger" onclick="toggleAdminSidebar()">
+      <span></span><span></span><span></span>
+    </div>
     <div class="logo">GPT<span>31</span> <span style="font-size:.62rem;background:var(--danger);color:#fff;padding:2px 8px;border-radius:4px;margin-left:7px">ADMIN</span></div>
     <button class="btn btn-outline btn-sm" onclick="doLogout()">Logout</button>
   </nav>
   <div class="dash-layout">
     <div class="sidebar" id="adminSidebar">
-      <div class="sidebar-item active" onclick="showAdminTab('overview')" data-tab="overview"><span class="icon">📊</span>Overview</div>
-      <div class="sidebar-item" onclick="showAdminTab('users')" data-tab="users"><span class="icon">👥</span>Users</div>
-      <div class="sidebar-item" onclick="showAdminTab('deposits')" data-tab="deposits"><span class="icon">💳</span>Deposits</div>
-      <div class="sidebar-item" onclick="showAdminTab('withdrawals')" data-tab="withdrawals"><span class="icon">💸</span>Withdrawals</div>
+      <!-- MODIFIED: close sidebar after tab selection on mobile -->
+      <div class="sidebar-item active" onclick="showAdminTab('overview');closeSidebar()" data-tab="overview"><span class="icon">📊</span>Overview</div>
+      <div class="sidebar-item" onclick="showAdminTab('users');closeSidebar()" data-tab="users"><span class="icon">👥</span>Users</div>
+      <div class="sidebar-item" onclick="showAdminTab('deposits');closeSidebar()" data-tab="deposits"><span class="icon">💳</span>Deposits</div>
+      <div class="sidebar-item" onclick="showAdminTab('withdrawals');closeSidebar()" data-tab="withdrawals"><span class="icon">💸</span>Withdrawals</div>
     </div>
     <div class="dash-content">
       <div id="admin-tab-overview" class="admin-tab">
@@ -898,30 +1048,33 @@
       </div>
       <div id="admin-tab-users" class="admin-tab" style="display:none">
         <h2 style="margin-bottom:22px;font-weight:700">All Users</h2>
-        <div class="panel">
+        <!-- ADDED: overflow-x:auto wrapper so table scrolls horizontally on mobile -->
+        <div class="panel"><div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
           <table class="admin-table">
             <thead><tr><th>Name</th><th>Phone/Email</th><th>Balance</th><th>Plan</th><th>Joined</th></tr></thead>
             <tbody id="adminUsersBody"></tbody>
           </table>
-        </div>
+        </div></div>
       </div>
       <div id="admin-tab-deposits" class="admin-tab" style="display:none">
         <h2 style="margin-bottom:22px;font-weight:700">Deposit Requests</h2>
-        <div class="panel">
+        <!-- ADDED: overflow-x:auto wrapper so table scrolls horizontally on mobile -->
+        <div class="panel"><div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
           <table class="admin-table">
             <thead><tr><th>User</th><th>Plan</th><th>Amount</th><th>Sender Name</th><th>Sender #</th><th>TXN ID</th><th>Method</th><th>Time</th><th>Action</th></tr></thead>
             <tbody id="adminDepositsBody"></tbody>
           </table>
-        </div>
+        </div></div>
       </div>
       <div id="admin-tab-withdrawals" class="admin-tab" style="display:none">
         <h2 style="margin-bottom:22px;font-weight:700">Withdrawal Requests</h2>
-        <div class="panel">
+        <!-- ADDED: overflow-x:auto wrapper so table scrolls horizontally on mobile -->
+        <div class="panel"><div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
           <table class="admin-table">
             <thead><tr><th>User</th><th>Amount</th><th>After Fee</th><th>Method</th><th>Number</th><th>Time</th><th>Action</th></tr></thead>
             <tbody id="adminWithdrawalsBody"></tbody>
           </table>
-        </div>
+        </div></div>
       </div>
     </div>
   </div>
@@ -2070,6 +2223,66 @@ function showToast(msg,type='success'){
   const t=document.getElementById('toast');t.textContent=msg;t.className='show '+(type==='success'?'success-toast':'error-toast');
   clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.className='';},3200);
 }
+// ══════════════════════════════════════════
+// MOBILE SIDEBAR FUNCTIONS
+// ADDED: Complete sidebar toggle system for dashboard, admin, and landing pages
+// ══════════════════════════════════════════
+
+// Close all sidebars and overlays — called when overlay is tapped or tab is selected
+function closeSidebar(){
+  // Close dashboard sidebar
+  const sb = document.getElementById('sidebar');
+  if(sb){ sb.classList.remove('open'); }
+  // Close admin sidebar
+  const asb = document.getElementById('adminSidebar');
+  if(asb){ asb.classList.remove('open'); }
+  // Hide overlay
+  const overlay = document.getElementById('sidebarOverlay');
+  if(overlay){ overlay.classList.remove('show'); }
+  // Reset hamburger button states
+  const dh = document.getElementById('dashHamburger');
+  if(dh){ dh.classList.remove('active'); }
+  const ah = document.getElementById('adminHamburger');
+  if(ah){ ah.classList.remove('active'); }
+}
+
+// Toggle dashboard sidebar (hamburger click)
+function toggleDashSidebar(){
+  const sb = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const btn = document.getElementById('dashHamburger');
+  if(!sb) return;
+  const isOpen = sb.classList.contains('open');
+  if(isOpen){
+    sb.classList.remove('open');
+    overlay && overlay.classList.remove('show');
+    btn && btn.classList.remove('active');
+  } else {
+    sb.classList.add('open');
+    overlay && overlay.classList.add('show');
+    btn && btn.classList.add('active');
+  }
+}
+
+// Toggle admin sidebar (hamburger click)
+function toggleAdminSidebar(){
+  const sb = document.getElementById('adminSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const btn = document.getElementById('adminHamburger');
+  if(!sb) return;
+  const isOpen = sb.classList.contains('open');
+  if(isOpen){
+    sb.classList.remove('open');
+    overlay && overlay.classList.remove('show');
+    btn && btn.classList.remove('active');
+  } else {
+    sb.classList.add('open');
+    overlay && overlay.classList.add('show');
+    btn && btn.classList.add('active');
+  }
+}
+
+// KEPT: original toggleMobileMenu for landing page nav (not used for sidebar)
 function toggleMobileMenu(){document.getElementById('sidebar')?.classList.toggle('open');}
 
 document.querySelectorAll('.modal-overlay').forEach(o=>{
