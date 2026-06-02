@@ -333,198 +333,113 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
 #toast.success-toast{border-color:rgba(245,197,24,.35);color:var(--green)}
 #toast.error-toast{border-color:rgba(240,64,96,.35);color:var(--danger)}
 
-
-/* ═══════════════════════════════════════
-   FULL SITE ANIMATIONS — GPT31
-═══════════════════════════════════════ */
-
-/* Keyframes */
+/* ═══ FULL SITE ANIMATIONS ═══ */
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@keyframes glowPulse{0%,100%{box-shadow:0 0 10px rgba(245,197,24,.25)}50%{box-shadow:0 0 30px rgba(245,197,24,.65)}}
-@keyframes glowGreen{0%,100%{box-shadow:0 0 10px rgba(0,200,120,.25)}50%{box-shadow:0 0 28px rgba(0,200,120,.6)}}
-@keyframes borderFlow{0%{border-color:rgba(245,197,24,.15)}50%{border-color:rgba(245,197,24,.55)}100%{border-color:rgba(245,197,24,.15)}}
-@keyframes slideUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideLeft{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:translateX(0)}}
-@keyframes slideRight{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:translateX(0)}}
-@keyframes zoomFade{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-@keyframes popIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
-@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes spinSlowR{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+@keyframes floatUp{0%{transform:translateY(0px)}50%{transform:translateY(-6px)}100%{transform:translateY(0px)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 12px rgba(245,197,24,.3)}50%{box-shadow:0 0 28px rgba(245,197,24,.7)}}
+@keyframes slideInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideInLeft2{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+@keyframes rotateIn{from{opacity:0;transform:rotate(-8deg) scale(.9)}to{opacity:1;transform:rotate(0deg) scale(1)}}
+@keyframes borderGlow{0%,100%{border-color:rgba(245,197,24,.2)}50%{border-color:rgba(245,197,24,.6)}}
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@keyframes ripple{0%{transform:scale(0);opacity:.5}100%{transform:scale(3);opacity:0}}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(1.4)}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-@keyframes numberPop{0%{transform:scale(1)}30%{transform:scale(1.18)}100%{transform:scale(1)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes waveY{0%,100%{transform:translateY(0)}25%{transform:translateY(-4px)}75%{transform:translateY(4px)}}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes ripple{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.5);opacity:0}}
 
-/* ── SCROLL REVEAL ── */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
+/* Scroll reveal: .reveal class added by JS */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-28px);transition:opacity .6s .08s cubic-bezier(.4,0,.2,1),transform .6s .08s cubic-bezier(.4,0,.2,1)}
+.reveal-left{opacity:0;transform:translateX(-24px);transition:opacity .55s .1s cubic-bezier(.4,0,.2,1),transform .55s .1s cubic-bezier(.4,0,.2,1)}
 .reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(28px);transition:opacity .6s .08s cubic-bezier(.4,0,.2,1),transform .6s .08s cubic-bezier(.4,0,.2,1)}
+.reveal-right{opacity:0;transform:translateX(24px);transition:opacity .55s .1s cubic-bezier(.4,0,.2,1),transform .55s .1s cubic-bezier(.4,0,.2,1)}
 .reveal-right.visible{opacity:1;transform:translateX(0)}
-.reveal-zoom{opacity:0;transform:scale(.88);transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1)}
+.reveal-zoom{opacity:0;transform:scale(.9);transition:opacity .5s .05s cubic-bezier(.4,0,.2,1),transform .5s .05s cubic-bezier(.4,0,.2,1)}
 .reveal-zoom.visible{opacity:1;transform:scale(1)}
 
-/* ── HERO ── */
-.hero{position:relative;overflow:hidden}
-.hero-ring-1{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:400px;height:400px;border-radius:50%;border:1px solid rgba(245,197,24,.07);animation:spinSlow 25s linear infinite;pointer-events:none}
-.hero-ring-2{position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,140,0,.06);animation:spinSlowR 18s linear infinite;pointer-events:none}
-.hero-ring-3{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:160px;height:160px;border-radius:50%;border:1px solid rgba(245,197,24,.09);animation:spinSlow 12s linear infinite;pointer-events:none}
-.hero h1{animation:slideUp .8s .1s cubic-bezier(.4,0,.2,1) both}
-.hero-p{animation:slideUp .8s .25s cubic-bezier(.4,0,.2,1) both}
-.hero-actions{animation:slideUp .8s .4s cubic-bezier(.4,0,.2,1) both}
-.hero-badge{animation:slideDown .7s .05s cubic-bezier(.4,0,.2,1) both}
+/* Hero animated gradient heading */
+.hero-grad-text{background:linear-gradient(90deg,#F5C518,#FF8C00,#FFD700,#F5C518);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
 
-/* Hero gradient text */
-.hero-grad-text{background:linear-gradient(90deg,#F5C518,#FF8C00,#FFD700,#F5C518);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 3s linear infinite}
+/* Plan cards hover lift */
+.plan-card{transition:transform .22s cubic-bezier(.4,0,.2,1),box-shadow .22s;cursor:pointer}
+.plan-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(245,197,24,.18)}
+.pro-plan-card{transition:transform .22s cubic-bezier(.4,0,.2,1),box-shadow .22s}
+.pro-plan-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(245,197,24,.15)}
 
-/* ── LOGO ── */
+/* Button hover effects */
+.btn-primary:hover{filter:brightness(1.12);box-shadow:0 6px 24px rgba(245,197,24,.45)}
+.btn-gold:hover{filter:brightness(1.1);box-shadow:0 6px 24px rgba(255,140,0,.4)}
+.btn-outline:hover{background:rgba(245,197,24,.1)}
+
+/* Balance card float animation */
+.balance-card{animation:floatUp 4s ease-in-out infinite}
+
+/* Nav logo shimmer */
 .logo-accent{background:linear-gradient(90deg,#F5C518,#FF8C00,#FFD700);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 2.5s linear infinite}
 .dn-logo span{background:linear-gradient(90deg,#F5C518,#FF8C00,#FFD700);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 2.5s linear infinite}
 
-/* ── NAV ── */
-.land-nav{animation:slideDown .5s ease both}
-.dash-nav{animation:slideDown .5s ease both}
+/* Stats row numbers */
+.stat-val{animation:countUp .6s ease both}
 
-/* ── PULSE DOT ── */
-.pulse-dot{background:#F5C518;animation:pulse 1.5s infinite}
+/* Feed items stagger */
+.feed-item{transition:transform .18s}
+.feed-item:hover{transform:translateX(4px)}
 
-/* ── TICKER ── */
+/* Live earn card glow */
+.live-earn-card{animation:borderGlow 3s ease-in-out infinite}
+
+/* Proof cards */
+.proof-card{transition:transform .2s,box-shadow .2s}
+.proof-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(245,197,24,.15)}
+
+/* Mini card hover */
+.mini-card{transition:transform .18s,box-shadow .18s}
+.mini-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,197,24,.12)}
+
+/* Step cards */
+.step{transition:transform .2s,border-color .2s}
+.step:hover{transform:translateX(4px);border-color:rgba(245,197,24,.3)}
+
+/* About cards */
+.about-card-item{transition:transform .2s,box-shadow .2s}
+.about-card-item:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(245,197,24,.1)}
+
+/* Ripple on buttons */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);border-radius:inherit;opacity:0;transition:opacity .3s}
+.btn:active::after{opacity:1}
+
+/* Ticker up color */
 .ticker-up{color:#F5C518}
 
-/* ── SEC BADGES ── */
-.sec-badge{color:#F5C518;background:rgba(245,197,24,.1);border-color:rgba(245,197,24,.22);transition:transform .2s}
-.sec-badge:hover{transform:scale(1.06)}
+/* Sec badge */
+.sec-badge{color:#F5C518;background:rgba(245,197,24,.1);border-color:rgba(245,197,24,.22)}
 
-/* ── ACTIVE USERS BAR ── */
-.aub-count{color:#F5C518;animation:numberPop .4s ease}
+/* Hero badge */
+.hero-badge{background:rgba(245,197,24,.1);border-color:rgba(245,197,24,.28);color:#F5C518}
 
-/* ── STAT ROW ── */
-.stat-val{color:#F5C518;animation:slideUp .6s ease both}
-.stat:nth-child(1) .stat-val{animation-delay:.05s}
-.stat:nth-child(2) .stat-val{animation-delay:.15s}
-.stat:nth-child(3) .stat-val{animation-delay:.25s}
-.stat:nth-child(4) .stat-val{animation-delay:.35s}
+/* Pulse dot */
+.pulse-dot{background:#F5C518}
 
-/* ── PLAN CARDS (LANDING) ── */
-.plan-card{transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s;cursor:pointer}
-.plan-card:hover{transform:translateY(-6px) scale(1.015);box-shadow:0 18px 48px rgba(245,197,24,.2)}
-.plan-card.featured{animation:glowPulse 3s ease-in-out infinite}
-
-/* ── PROOF CARDS ── */
-.proof-card{transition:transform .22s,box-shadow .22s}
-.proof-card:hover{transform:translateY(-5px);box-shadow:0 10px 28px rgba(245,197,24,.18)}
-
-/* ── STEP CARDS ── */
-.step{transition:transform .22s,border-color .22s,box-shadow .22s}
-.step:hover{transform:translateX(6px);border-color:rgba(245,197,24,.4);box-shadow:4px 0 20px rgba(245,197,24,.1)}
-
-/* ── ABOUT CARDS ── */
-.about-card-item{transition:transform .22s,box-shadow .22s}
-.about-card-item:hover{transform:translateY(-5px);box-shadow:0 10px 28px rgba(245,197,24,.12)}
-
-/* ── FEED ITEMS ── */
-.feed-item{transition:transform .18s,background .18s}
-.feed-item:hover{transform:translateX(5px);background:rgba(245,197,24,.05)}
-
-/* ── BUTTONS ── */
-.btn{position:relative;overflow:hidden;transition:transform .18s,filter .18s,box-shadow .18s}
-.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.18);opacity:0;border-radius:inherit;transition:opacity .25s}
-.btn:active::after{opacity:1}
-.btn:active{transform:scale(.96)}
-
-/* PRIMARY (Green for Deposit) */
-.btn-primary{background:linear-gradient(135deg,#00C878,#00A060);color:#fff;box-shadow:0 4px 18px rgba(0,200,120,.3)}
-.btn-primary:hover{filter:brightness(1.12);box-shadow:0 8px 28px rgba(0,200,120,.45);transform:translateY(-2px)}
-
-/* GOLD (Yellow for Withdraw) */
-.btn-gold{background:linear-gradient(135deg,#F5C518,#D4A017);color:#111;font-weight:700;box-shadow:0 4px 18px rgba(245,197,24,.35)}
-.btn-gold:hover{filter:brightness(1.1);box-shadow:0 8px 28px rgba(245,197,24,.5);transform:translateY(-2px)}
-
-.btn-outline{background:transparent;border:1.5px solid #F5C518;color:#F5C518}
-.btn-outline:hover{background:rgba(245,197,24,.1);transform:translateY(-1px)}
-.btn-secondary:hover{border-color:rgba(255,255,255,.2);transform:translateY(-1px)}
-.btn-teal{background:linear-gradient(135deg,#FF8C00,#E07800);color:#fff}
-.btn-teal:hover{filter:brightness(1.1);transform:translateY(-2px)}
-.btn-danger:hover{filter:brightness(1.1);transform:translateY(-1px)}
-
-/* ── BALANCE CARD ── */
-.balance-card{animation:float 5s ease-in-out infinite}
-.balance-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#F5C518,#FF8C00,#F5C518);background-size:200% auto;animation:shimmer 2s linear infinite}
-
-/* ── MINI CARDS ── */
-.mini-card{transition:transform .2s,box-shadow .2s;animation:slideUp .5s ease both}
-.mini-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(245,197,24,.12)}
-.cards-row .mini-card:nth-child(1){animation-delay:.05s}
-.cards-row .mini-card:nth-child(2){animation-delay:.12s}
-.cards-row .mini-card:nth-child(3){animation-delay:.19s}
-.cards-row .mini-card:nth-child(4){animation-delay:.26s}
-
-/* ── PANELS ── */
-.panel{transition:box-shadow .22s,border-color .22s}
-.panel:hover{box-shadow:0 6px 24px rgba(245,197,24,.08);border-color:rgba(245,197,24,.18)}
-
-/* ── PRO PLAN CARDS (DASHBOARD) ── */
-.pro-plan-card{transition:transform .26s cubic-bezier(.4,0,.2,1),box-shadow .26s}
-.pro-plan-card:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 14px 40px rgba(245,197,24,.18)}
-.pro-plan-card.is-featured{animation:glowPulse 3s ease-in-out infinite}
-
-/* ── LIVE EARN CARD ── */
-.live-earn-card{animation:borderFlow 2.5s ease-in-out infinite}
-.lec-timer{animation:waveY 2s ease-in-out infinite}
-
-/* ── BOTTOM NAV ── */
-.bn-item{transition:color .18s,transform .18s}
+/* Bottom nav active */
 .bn-item.active{color:#F5C518}
-.bn-item.active .bni{transform:translateY(-3px)}
 .bn-item.active::before{background:linear-gradient(90deg,#F5C518,#FF8C00)}
-.bn-item:hover .bni{transform:translateY(-2px)}
 
-/* ── BALANCE CHIP ── */
-.balance-chip{background:rgba(245,197,24,.1);border-color:rgba(245,197,24,.25);color:#F5C518;animation:glowPulse 3s ease-in-out infinite}
+/* Balance chip */
+.balance-chip{background:rgba(245,197,24,.1);border-color:rgba(245,197,24,.25);color:#F5C518}
 
-/* ── MODAL ── */
-.modal{animation:slideUp .3s cubic-bezier(.4,0,.2,1) both}
+/* Panel ptag */
+.panel-title .ptag{color:#F5C518;background:rgba(245,197,24,.1)}
 
-/* ── PAYMENT METHOD CARD ── */
-.pay-method-card{transition:all .22s}
-.pay-method-card:hover{transform:scale(1.02)}
-.pay-method-card.selected{animation:glowPulse 2.5s ease-in-out infinite}
+/* Saved num locked */
+.sn-type-badge{color:#F5C518;background:rgba(245,197,24,.1);border-color:rgba(245,197,24,.2)}
 
-/* ── PROFILE AVATAR ── */
-.profile-avatar{animation:float 4s ease-in-out infinite}
+/* Loading bar */
+#loadingBar{background:linear-gradient(90deg,#F5C518,#FF8C00)}
 
-/* ── REF CODE BOX ── */
-.ref-code-box{animation:borderFlow 3s ease-in-out infinite}
-.ref-code-val{animation:gradShift 4s linear infinite;background:linear-gradient(90deg,#F5C518,#FF8C00,#FFD700);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-
-/* ── LOADING BAR ── */
-#loadingBar{background:linear-gradient(90deg,#F5C518,#FF8C00,#F5C518);background-size:200% auto;animation:shimmer 1s linear infinite}
-
-/* ── TOAST ── */
-#toast.show{animation:popIn .35s cubic-bezier(.34,1.56,.64,1) both}
-#toast.success-toast{border-color:rgba(0,200,120,.4);color:#00C878}
-#toast.error-toast{border-color:rgba(240,64,96,.35);color:#F04060}
-
-/* ── LIVE NOTIF ── */
-.lw-notif{border-color:rgba(245,197,24,.35)}
-.lw-amount{color:#F5C518}
-
-/* ── ADMIN STAT BOX ── */
-.admin-stat-box{transition:transform .2s,box-shadow .2s}
-.admin-stat-box:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(245,197,24,.12)}
-.admin-stat-box .asv{color:#F5C518}
-
-/* ── FOOTER ── */
+/* Footer support */
 .footer-support{background:rgba(245,197,24,.08);border-color:rgba(245,197,24,.2);color:#F5C518}
-.footer-logo span{color:#F5C518}
 
 </style>
 </head>
@@ -689,24 +604,24 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
         <div class="balance-val">₨<span id="totalBalance">0.00</span></div>
         <div class="balance-sub">Ready for withdrawal</div>
         <div class="balance-actions">
-          <button class="btn btn-full" onclick="showDepositFlow()" style="flex:1;background:linear-gradient(135deg,#00C878,#009958);color:#fff;font-weight:700;box-shadow:0 4px 16px rgba(0,200,120,.3);border:none;min-height:44px;font-family:'Outfit',sans-serif;border-radius:9px;font-size:.87rem;cursor:pointer">💰 Deposit</button>
-          <button class="btn btn-full" onclick="showDashTab('withdrawal')" style="flex:1;background:linear-gradient(135deg,#F5C518,#D4A017);color:#111;font-weight:700;box-shadow:0 4px 16px rgba(245,197,24,.3);border:none;min-height:44px;font-family:'Outfit',sans-serif;border-radius:9px;font-size:.87rem;cursor:pointer">💸 Withdraw</button>
+          <button class="btn btn-primary" onclick="showDepositFlow()">💰 Deposit</button>
+          <button class="btn btn-gold" onclick="showDashTab('withdrawal')">💸 Withdraw</button>
         </div>
       </div>
       <div class="cards-row">
-        <div class="mini-card reveal-zoom"><div class="mc-label">Est. Daily</div><div class="mc-val" id="todayEarning" style="color:var(--green)">₨0</div><div class="mc-sub">Estimated return</div></div>
-        <div class="mini-card reveal-zoom"><div class="mc-label">Total Invested</div><div class="mc-val" id="totalInvested" style="color:var(--gold)">₨0</div><div class="mc-sub">Active capital</div></div>
-        <div class="mini-card reveal-zoom"><div class="mc-label">Active Plan</div><div class="mc-val" id="activePlanName" style="font-size:.8rem;margin-top:4px">None</div><div class="mc-sub" id="activePlanReturn"></div></div>
-        <div class="mini-card reveal-zoom"><div class="mc-label">Withdrawn</div><div class="mc-val" id="totalWithdrawn" style="color:var(--danger)">₨0</div><div class="mc-sub">Lifetime</div></div>
+        <div class="mini-card"><div class="mc-label">Est. Daily</div><div class="mc-val" id="todayEarning" style="color:var(--green)">₨0</div><div class="mc-sub">Estimated return</div></div>
+        <div class="mini-card"><div class="mc-label">Total Invested</div><div class="mc-val" id="totalInvested" style="color:var(--gold)">₨0</div><div class="mc-sub">Active capital</div></div>
+        <div class="mini-card"><div class="mc-label">Active Plan</div><div class="mc-val" id="activePlanName" style="font-size:.8rem;margin-top:4px">None</div><div class="mc-sub" id="activePlanReturn"></div></div>
+        <div class="mini-card"><div class="mc-label">Withdrawn</div><div class="mc-val" id="totalWithdrawn" style="color:var(--danger)">₨0</div><div class="mc-sub">Lifetime</div></div>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Account Summary</div>
         <div class="info-row"><span class="label">Total Earned</span><span class="value" id="sumTotalEarned" style="color:var(--green)">₨0</span></div>
         <div class="info-row"><span class="label">Referrals</span><span class="value" id="sumRefCount">0</span></div>
         <div class="info-row"><span class="label">Ref. Commission</span><span class="value" style="color:var(--gold)" id="sumRefEarned">₨0</span></div>
         <div class="info-row"><span class="label">Account Status</span><span class="value" style="color:var(--green)">✓ Active</span></div>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Recent Activity <span class="ptag">Latest 5</span></div>
         <div style="overflow-x:auto"><table class="hist-table">
           <thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead>
@@ -734,15 +649,15 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
       <p style="color:var(--gray2);font-size:.79rem;margin-bottom:13px">Live earnings tracking — updates every second</p>
       <div id="liveEarningsSection"></div>
       <div class="cards-row">
-        <div class="mini-card reveal-zoom"><div class="mc-label">Balance</div><div class="mc-val" style="color:var(--gold)">₨<span id="earnBalance">0</span></div></div>
-        <div class="mini-card reveal-zoom"><div class="mc-label">Est. Today</div><div class="mc-val" style="color:var(--green)">₨<span id="earnToday">0</span></div></div>
-        <div class="mini-card reveal-zoom"><div class="mc-label">Total Earned</div><div class="mc-val">₨<span id="earnTotal">0</span></div></div>
+        <div class="mini-card"><div class="mc-label">Balance</div><div class="mc-val" style="color:var(--gold)">₨<span id="earnBalance">0</span></div></div>
+        <div class="mini-card"><div class="mc-label">Est. Today</div><div class="mc-val" style="color:var(--green)">₨<span id="earnToday">0</span></div></div>
+        <div class="mini-card"><div class="mc-label">Total Earned</div><div class="mc-val">₨<span id="earnTotal">0</span></div></div>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Earnings Breakdown</div>
         <div id="earningsBreakdown" style="color:var(--gray2);font-size:.82rem;padding:4px 0">No active plan. <a href="#" onclick="showDashTab('plans');return false;" style="color:var(--green)">Choose a plan.</a></div>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Earnings History</div>
         <div style="overflow-x:auto"><table class="hist-table">
           <thead><tr><th>Date</th><th>Plan</th><th>Est. Profit</th><th>Status</th></tr></thead>
@@ -775,12 +690,12 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
           <div style="font-size:.64rem;color:var(--green);background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.2);border-radius:100px;padding:2px 8px">✓ Supported</div>
         </div>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Payment Methods <span class="ptag" id="savedNums-count">0 saved</span></div>
         <div id="savedNums"></div>
         <div id="addNumButtons" style="margin-top:9px;display:flex;gap:7px;flex-wrap:wrap"></div>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Request Withdrawal</div>
         <div class="info-row" style="margin-bottom:12px"><span class="label">Available Balance</span><span class="value" id="wdAvailBalance">₨0</span></div>
         <div class="form-group"><label>Amount (Min. ₨300)</label><input type="number" id="wdAmount" placeholder="Enter amount" oninput="calcWdFee()"></div>
@@ -794,7 +709,7 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
         </div>
         <button class="btn btn-primary btn-full" onclick="submitWithdrawal()">Request Withdrawal</button>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Withdrawal History</div>
         <div style="overflow-x:auto"><table class="hist-table">
           <thead><tr><th>Date</th><th>Amount</th><th>Method</th><th>Status</th></tr></thead>
@@ -808,8 +723,8 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
       <h2 style="margin-bottom:5px;font-size:1.03rem;font-weight:700">Refer & Earn 🎁</h2>
       <p style="color:var(--gray2);font-size:.79rem;margin-bottom:13px">Earn 30% commission on every plan your referrals purchase!</p>
       <div class="cards-row">
-        <div class="mini-card reveal-zoom"><div class="mc-label">Total Referrals</div><div class="mc-val" id="refCount">0</div><div class="mc-sub">Invited</div></div>
-        <div class="mini-card reveal-zoom"><div class="mc-label">Commission</div><div class="mc-val" id="refEarned" style="color:var(--gold)">₨0</div><div class="mc-sub">30% per plan</div></div>
+        <div class="mini-card"><div class="mc-label">Total Referrals</div><div class="mc-val" id="refCount">0</div><div class="mc-sub">Invited</div></div>
+        <div class="mini-card"><div class="mc-label">Commission</div><div class="mc-val" id="refEarned" style="color:var(--gold)">₨0</div><div class="mc-sub">30% per plan</div></div>
       </div>
       <div class="ref-code-box">
         <div class="ref-code-label">My Referral Code</div>
@@ -825,7 +740,7 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
         💰 They buy a plan → You earn <strong style="color:var(--gold)">30% commission</strong><br>
         🔒 Self-referral is blocked
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Referred Users</div>
         <div style="overflow-x:auto"><table class="ref-table">
           <thead><tr><th>Name</th><th>Joined</th><th>Plans</th><th>Commission</th></tr></thead>
@@ -841,7 +756,7 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
         <div class="profile-name" id="profileName">-</div>
         <div class="profile-status"><span style="width:7px;height:7px;background:var(--green);border-radius:50%;display:inline-block"></span> Active Account</div>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Account Information</div>
         <div class="info-row"><span class="label">Full Name</span><span class="value" id="profileName2">-</span></div>
         <div class="info-row"><span class="label">Phone / Email</span><span class="value" id="profileId">-</span></div>
@@ -851,7 +766,7 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
         <div class="info-row"><span class="label">Total Referrals</span><span class="value" id="profileRefCount">0</span></div>
         <div class="info-row"><span class="label">Ref. Earnings</span><span class="value" id="profileRefEarned">₨0</span></div>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <div class="panel-title">Security & Support</div>
         <div style="font-size:.79rem;color:var(--gray2);line-height:1.7;margin-bottom:12px">🔒 For payment method changes, contact admin support via WhatsApp.</div>
         <a href="https://wa.me/923291361140" target="_blank" class="btn btn-outline btn-full" style="margin-bottom:9px">📱 Contact Support on WhatsApp</a>
@@ -890,10 +805,10 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
       <div class="admin-tab-btn" onclick="showAdminTabPanel('awithdrawals',this)">💸 Withdrawals</div>
       <div class="admin-tab-btn" onclick="showAdminTabPanel('apayments',this)">🔧 Payment Methods</div>
     </div>
-    <div id="tab-ausers" class="dash-tab active"><div class="panel reveal"><div class="panel-title">All Users</div><div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>Name</th><th>Phone/Email</th><th>Balance</th><th>Plan</th><th>Joined</th></tr></thead><tbody id="adUsersBody"></tbody></table></div></div></div>
-    <div id="tab-adeposits" class="dash-tab"><div class="panel reveal"><div class="panel-title">Deposit Requests</div><div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>User</th><th>Plan</th><th>Amt</th><th>Sender</th><th>TXN ID</th><th>Method</th><th>Time</th><th>Action</th></tr></thead><tbody id="adDepsBody"></tbody></table></div></div></div>
-    <div id="tab-awithdrawals" class="dash-tab"><div class="panel reveal"><div class="panel-title">Withdrawal Requests</div><div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>User</th><th>Amount</th><th>After Fee</th><th>Method</th><th>Number</th><th>Time</th><th>Action</th></tr></thead><tbody id="adWdsBody"></tbody></table></div></div></div>
-    <div id="tab-apayments" class="dash-tab"><div class="panel reveal"><div class="panel-title">Manage Payment Methods</div><div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>User</th><th>Type</th><th>Name</th><th>Number</th><th>Action</th></tr></thead><tbody id="adPaymentsBody"></tbody></table></div></div></div>
+    <div id="tab-ausers" class="dash-tab active"><div class="panel"><div class="panel-title">All Users</div><div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>Name</th><th>Phone/Email</th><th>Balance</th><th>Plan</th><th>Joined</th></tr></thead><tbody id="adUsersBody"></tbody></table></div></div></div>
+    <div id="tab-adeposits" class="dash-tab"><div class="panel"><div class="panel-title">Deposit Requests</div><div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>User</th><th>Plan</th><th>Amt</th><th>Sender</th><th>TXN ID</th><th>Method</th><th>Time</th><th>Action</th></tr></thead><tbody id="adDepsBody"></tbody></table></div></div></div>
+    <div id="tab-awithdrawals" class="dash-tab"><div class="panel"><div class="panel-title">Withdrawal Requests</div><div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>User</th><th>Amount</th><th>After Fee</th><th>Method</th><th>Number</th><th>Time</th><th>Action</th></tr></thead><tbody id="adWdsBody"></tbody></table></div></div></div>
+    <div id="tab-apayments" class="dash-tab"><div class="panel"><div class="panel-title">Manage Payment Methods</div><div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>User</th><th>Type</th><th>Name</th><th>Number</th><th>Action</th></tr></thead><tbody id="adPaymentsBody"></tbody></table></div></div></div>
   </div>
 </div>
 
@@ -1078,66 +993,31 @@ if(!db.users['admin@gpt31.com']){db.users['admin@gpt31.com']={id:'admin',name:'A
 // LANDING PLANS
 function buildLandingPlans(){
   const g=document.getElementById('plansGrid');if(!g)return;
-  const themes=[
-    {b:'rgba(100,200,255,.32)',gl:'rgba(100,200,255,.1)',ac:'#64C8FF',bg:'rgba(0,40,70,.5)'},
-    {b:'rgba(100,220,140,.32)',gl:'rgba(100,220,140,.1)',ac:'#64DC8C',bg:'rgba(0,50,25,.5)'},
-    {b:'rgba(245,197,24,.4)',gl:'rgba(245,197,24,.1)',ac:'#F5C518',bg:'rgba(50,35,0,.5)'},
-    {b:'rgba(180,120,255,.32)',gl:'rgba(180,120,255,.1)',ac:'#B478FF',bg:'rgba(35,0,70,.5)'},
-    {b:'rgba(255,140,0,.42)',gl:'rgba(255,140,0,.12)',ac:'#FF8C00',bg:'rgba(55,25,0,.5)'},
-    {b:'rgba(0,210,220,.32)',gl:'rgba(0,210,220,.1)',ac:'#00D2DC',bg:'rgba(0,45,50,.5)'},
-    {b:'rgba(255,100,150,.32)',gl:'rgba(255,100,150,.1)',ac:'#FF6496',bg:'rgba(55,0,22,.5)'},
-    {b:'rgba(255,220,0,.42)',gl:'rgba(255,220,0,.12)',ac:'#FFDC00',bg:'rgba(50,42,0,.5)'},
-    {b:'rgba(200,150,255,.42)',gl:'rgba(200,150,255,.14)',ac:'#C896FF',bg:'rgba(30,0,65,.5)'},
-  ];
-  g.innerHTML=PLANS.map((p,i)=>{
-    const t=themes[i%themes.length];
-    const bc=p.featured?'rgba(245,197,24,.58)':t.b;
-    const gc=p.featured?'rgba(245,197,24,.16)':t.gl;
-    const ac=p.featured?'#F5C518':t.ac;
-    return `<div onclick="showAuth('register')"
-      style="background:linear-gradient(148deg,${t.bg},rgba(10,14,32,.98));border:1.5px solid ${bc};border-radius:14px;padding:18px 15px;position:relative;overflow:hidden;cursor:pointer;transition:transform .28s,box-shadow .28s;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 24px ${gc}"
-      onmouseover="this.style.transform='translateY(-6px) scale(1.015)';this.style.boxShadow='0 18px 48px ${gc.replace('.1','0.28').replace('.12','0.32').replace('.14','0.35').replace('.16','0.36')}'"
-      onmouseout="this.style.transform='';this.style.boxShadow='inset 0 1px 0 rgba(255,255,255,.06),0 4px 24px ${gc}'">
-      <!-- Top accent line -->
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,${bc},${ac},${bc})"></div>
-      ${p.featured?'<div style="position:absolute;top:13px;right:13px;background:linear-gradient(135deg,#F5C518,#FF8C00);color:#111;font-size:.58rem;font-weight:700;letter-spacing:1.5px;padding:3px 9px;border-radius:100px">⭐ POPULAR</div>':''}
-      <!-- Icon + Name -->
-      <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px">
-        <div style="width:48px;height:48px;border-radius:13px;background:${gc};border:1.5px solid ${bc};display:flex;align-items:center;justify-content:center;font-size:1.55rem;flex-shrink:0">${p.icon}</div>
-        <div>
-          <div style="font-size:.63rem;color:${ac};font-weight:700;letter-spacing:1.3px;text-transform:uppercase;margin-bottom:3px">${p.label} Plan</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:1.45rem;font-weight:700;color:#fff;line-height:1">₨${p.amount.toLocaleString()} <span style="font-size:.75rem;color:rgba(255,255,255,.45);font-weight:400">investment</span></div>
-        </div>
-      </div>
-      <!-- Daily earnings box -->
-      <div style="background:${gc};border:1.5px solid ${bc};border-radius:11px;padding:12px 10px;text-align:center;margin:0 0 10px">
-        <div style="font-size:.61rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">Estimated Daily Earnings</div>
-        <div style="font-family:'Outfit',sans-serif;font-size:1.75rem;font-weight:800;color:${ac};line-height:1">₨${p.dailyReturn.toLocaleString()}</div>
-        <div style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:3px">per day (estimated)</div>
-      </div>
-      <!-- Disclaimer -->
-      <div style="font-size:.6rem;color:rgba(255,255,255,.35);text-align:center;margin-bottom:9px;font-style:italic">⚠️ Earnings may vary based on system activity</div>
-      <!-- Return rate badge -->
-      <div style="text-align:center;margin-bottom:12px">
-        <span style="display:inline-block;background:${gc};border:1px solid ${bc};border-radius:100px;padding:4px 13px;font-size:.73rem;font-weight:700;color:${ac}">+${p.returnPct}% estimated return</span>
-      </div>
-      <!-- Features -->
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:15px;padding:0">
-        <li style="font-size:.76rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><span style="color:${ac}">✓</span> Instant plan activation</li>
-        <li style="font-size:.76rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><span style="color:${ac}">✓</span> JazzCash / EasyPaisa</li>
-        <li style="font-size:.76rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><span style="color:${ac}">✓</span> 24/7 automatic tracking</li>
-        <li style="font-size:.76rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><span style="color:${ac}">📅</span> 60 Days Activation</li>
-      </ul>
-      <!-- Button -->
-      <button style="width:100%;padding:12px;border-radius:9px;border:none;background:linear-gradient(135deg,#00C878,#009958);color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:.87rem;cursor:pointer;box-shadow:0 4px 18px rgba(0,200,120,.3);transition:all .2s;min-height:44px"
-        onmouseover="this.style.filter='brightness(1.12)';this.style.transform='translateY(-1px)'"
-        onmouseout="this.style.filter='';this.style.transform=''">
-        💰 Invest ₨${p.amount.toLocaleString()}
-      </button>
-    </div>`;
-  }).join('');
+  g.innerHTML=PLANS.map(p=>`<div class="plan-card ${p.featured?'featured':''}" onclick="showAuth('register')">
+    <div class="plan-icon">${p.icon}</div><div class="plan-name">${p.label} Plan</div>
+    <div class="plan-amount">₨${p.amount.toLocaleString()}<span>investment</span></div>
+    <div class="plan-est-box"><div class="plan-est-label">Estimated Daily Earnings</div><div class="plan-est-val">₨${p.dailyReturn.toLocaleString()}</div><div class="plan-est-sub">per day (estimated)</div></div>
+    <div class="plan-disclaimer">⚠️ Earnings may vary based on system activity</div>
+    <ul class="plan-features"><li>Instant plan activation</li><li>JazzCash / EasyPaisa</li><li>24/7 automatic tracking</li><li>Plan Duration: 60 Days</li></ul>
+    <button class="btn btn-primary btn-full">Invest ₨${p.amount.toLocaleString()}</button>
+  </div>`).join('');
 }
+buildLandingPlans();
 
+// LIVE FEED
+const feedNames=[
+  {n:'Ali Hassan',a:'👨',city:'Lahore'},{n:'Sara Malik',a:'👩',city:'Karachi'},
+  {n:'Usman Khan',a:'👨',city:'Islamabad'},{n:'Fatima Zahra',a:'👩',city:'Faisalabad'},
+  {n:'Bilal Ahmed',a:'👨',city:'Rawalpindi'},{n:'Nadia Sultana',a:'👩',city:'Multan'},
+  {n:'Imran Tahir',a:'👨',city:'Peshawar'},{n:'Maria Rana',a:'👩',city:'Quetta'},
+  {n:'Zain Ul Abideen',a:'👨',city:'Sialkot'},{n:'Aisha Baig',a:'👩',city:'Gujranwala'},
+  {n:'Hamza Raza',a:'👨',city:'Lahore'},{n:'Sana Ijaz',a:'👩',city:'Karachi'},
+  {n:'Farhan Ali',a:'👨',city:'Islamabad'},{n:'Rabia Noor',a:'👩',city:'Quetta'},
+  {n:'Kashif Mehmood',a:'👨',city:'Multan'},{n:'Huma Tariq',a:'👩',city:'Peshawar'},
+  {n:'Arslan Butt',a:'👨',city:'Faisalabad'},{n:'Maryam Shah',a:'👩',city:'Sialkot'},
+  {n:'Adnan Iqbal',a:'👨',city:'Rawalpindi'},{n:'Nimra Malik',a:'👩',city:'Lahore'},
+];
+let feedIdx=0;
 function addOneFeedItem(){
   const c=document.getElementById('liveFeedList');if(!c)return;
   if(!PLANS||!PLANS.length)return;
@@ -1326,56 +1206,16 @@ function renderLiveCards(){
 function buildDashPlans(){
   const g=document.getElementById('dashPlansGrid');if(!g)return;
   const u=getU();const aps=getAPs(u);
-  const themes=[
-    {b:'rgba(100,200,255,.32)',gl:'rgba(100,200,255,.1)',ac:'#64C8FF',bg:'rgba(0,40,70,.5)'},
-    {b:'rgba(100,220,140,.32)',gl:'rgba(100,220,140,.1)',ac:'#64DC8C',bg:'rgba(0,50,25,.5)'},
-    {b:'rgba(245,197,24,.4)',gl:'rgba(245,197,24,.1)',ac:'#F5C518',bg:'rgba(50,35,0,.5)'},
-    {b:'rgba(180,120,255,.32)',gl:'rgba(180,120,255,.1)',ac:'#B478FF',bg:'rgba(35,0,70,.5)'},
-    {b:'rgba(255,140,0,.42)',gl:'rgba(255,140,0,.12)',ac:'#FF8C00',bg:'rgba(55,25,0,.5)'},
-    {b:'rgba(0,210,220,.32)',gl:'rgba(0,210,220,.1)',ac:'#00D2DC',bg:'rgba(0,45,50,.5)'},
-    {b:'rgba(255,100,150,.32)',gl:'rgba(255,100,150,.1)',ac:'#FF6496',bg:'rgba(55,0,22,.5)'},
-    {b:'rgba(255,220,0,.42)',gl:'rgba(255,220,0,.12)',ac:'#FFDC00',bg:'rgba(50,42,0,.5)'},
-    {b:'rgba(200,150,255,.42)',gl:'rgba(200,150,255,.14)',ac:'#C896FF',bg:'rgba(30,0,65,.5)'},
-  ];
-  g.innerHTML=PLANS.map((p,i)=>{
-    const isA=aps.some(ap=>ap.planId===p.id);
-    const t=themes[i%themes.length];
-    const bc=isA?'rgba(0,210,120,.55)':p.featured?'rgba(245,197,24,.58)':t.b;
-    const gc=isA?'rgba(0,210,120,.14)':p.featured?'rgba(245,197,24,.16)':t.gl;
-    const ac=isA?'#00D278':p.featured?'#F5C518':t.ac;
-    return `<div class="pro-plan-card reveal-zoom ${p.featured?'is-featured':''} ${isA?'is-active':''}"
-      style="border-color:${bc};background:linear-gradient(148deg,${t.bg},rgba(10,14,32,.98));box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 4px 28px ${gc}">
-      ${p.featured&&!isA?`<div class="ppc-pop" style="background:linear-gradient(135deg,#F5C518,#FF8C00);color:#111;font-size:.6rem">⭐ POPULAR</div>`:''}
-      ${isA?'<div class="ppc-act" style="background:linear-gradient(135deg,#00C878,#009958);color:#fff;font-size:.6rem">✓ ACTIVE</div>':''}
-      <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px">
-        <div style="width:48px;height:48px;border-radius:13px;background:${gc};border:1.5px solid ${bc};display:flex;align-items:center;justify-content:center;font-size:1.55rem;flex-shrink:0;box-shadow:0 2px 12px ${gc}">${p.icon}</div>
-        <div>
-          <div style="font-size:.63rem;color:${ac};font-weight:700;letter-spacing:1.3px;text-transform:uppercase;margin-bottom:3px">${p.label} Plan</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;line-height:1">₨${p.amount.toLocaleString()}</div>
-        </div>
-      </div>
-      <div style="background:${gc};border:1.5px solid ${bc};border-radius:11px;padding:12px 10px;text-align:center;margin:0 0 10px">
-        <div style="font-size:.61rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">Estimated Daily Earnings</div>
-        <div style="font-family:'Outfit',sans-serif;font-size:1.75rem;font-weight:800;color:${ac};line-height:1">₨${p.dailyReturn.toLocaleString()}</div>
-        <div style="font-size:.62rem;color:rgba(255,255,255,.4);margin-top:3px">per day (estimated)</div>
-      </div>
-      <div style="font-size:.6rem;color:rgba(255,255,255,.35);text-align:center;margin-bottom:8px;font-style:italic">⚠️ Earnings may vary based on system activity</div>
-      <div style="text-align:center;margin-bottom:11px">
-        <span style="display:inline-block;background:${gc};border:1px solid ${bc};border-radius:100px;padding:4px 12px;font-size:.73rem;font-weight:700;color:${ac}">+${p.returnPct}% estimated return</span>
-      </div>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:14px;padding:0">
-        <li style="font-size:.76rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><span style="color:${ac}">✓</span> Instant plan activation</li>
-        <li style="font-size:.76rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><span style="color:${ac}">✓</span> JazzCash / EasyPaisa</li>
-        <li style="font-size:.76rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><span style="color:${ac}">✓</span> 24/7 auto tracking</li>
-        <li style="font-size:.76rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><span style="color:${ac}">✓</span> 30% referral commission</li>
-        <li style="font-size:.76rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px"><span style="color:${ac}">📅</span> 60 Days Activation</li>
-      </ul>
-      <button onclick="showDepositFlow(${p.id})" style="width:100%;padding:12px;border-radius:9px;border:none;background:linear-gradient(135deg,#00C878,#009958);color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:.87rem;cursor:pointer;box-shadow:0 4px 18px rgba(0,200,120,.32);transition:all .2s;min-height:44px"
-        onmouseover="this.style.filter='brightness(1.12)';this.style.transform='translateY(-1px)'"
-        onmouseout="this.style.filter='';this.style.transform=''"
-      >${isA?'💰 Invest Again':'💰 Deposit ₨'+p.amount.toLocaleString()}</button>
-    </div>`;
-  }).join('');
+  g.innerHTML=PLANS.map(p=>{const isA=aps.some(ap=>ap.planId===p.id);return `<div class="pro-plan-card ${p.featured?'is-featured':''} ${isA?'is-active':''}">
+    ${p.featured&&!isA?'<div class="ppc-pop">POPULAR</div>':''}${isA?'<div class="ppc-act">✓ ACTIVE</div>':''}
+    <div class="ppc-icon">${p.icon}</div><div class="ppc-label">${p.label} Plan</div>
+    <div class="ppc-amount">₨${p.amount.toLocaleString()}</div>
+    <div class="ppc-est-box"><div class="ppc-est-label">Estimated Daily Earnings</div><div class="ppc-est-val">₨${p.dailyReturn.toLocaleString()}</div><div class="ppc-est-sub">per day (estimated)</div></div>
+    <div class="ppc-disclaimer">⚠️ Earnings may vary based on system activity</div>
+    <div class="ppc-rate">+${p.returnPct}% est. return rate</div>
+    <ul class="ppc-features"><li>Instant plan activation</li><li>JazzCash / EasyPaisa</li><li>24/7 tracking</li><li>30% referral commission</li><li>60 Days Activation</li></ul>
+    <button class="btn ${isA?'btn-teal':'btn-primary'} btn-full" onclick="showDepositFlow(${p.id})">${isA?'Invest Again':'Deposit ₨'+p.amount.toLocaleString()}</button>
+  </div>`;}).join('');
 }
 
 function renderRecentTx(){const u=getU();const txs=(u.transactions||[]).slice(-5).reverse();const b=document.getElementById('recentTxBody');if(!b)return;b.innerHTML=txs.length?txs.map(t=>`<tr><td>${new Date(t.time).toLocaleDateString()}</td><td style="text-transform:capitalize">${t.type}</td><td>₨${t.amount.toLocaleString()}</td><td><span class="badge badge-${t.status==='approved'||t.status==='success'?'success':t.status==='pending'?'pending':'fail'}">${t.status}</span></td></tr>`).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--gray);padding:15px">No transactions yet</td></tr>';}
@@ -1403,7 +1243,7 @@ function renderReferral(){const u=getU();const refs=u.referrals||[];const set=(i
 function showDashTab(tab){
   document.querySelectorAll('#page-dashboard .dash-tab').forEach(t=>t.classList.remove('active'));const te=document.getElementById('tab-'+tab);if(te)te.classList.add('active');
   document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));const map={home:'bn-home',plans:'bn-plans',earnings:'bn-earnings',withdrawal:'bn-withdrawal',referral:'bn-referral',profile:'bn-profile'};const bn=document.getElementById(map[tab]||'bn-home');if(bn)bn.classList.add('active');
-  if(tab==='earnings')renderLiveCards();if(tab==='plans')buildDashPlans();if(tab==='withdrawal'){renderSavedNums();renderWdHist();}if(tab==='referral')renderReferral();window.scrollTo(0,0);setTimeout(()=>{if(typeof initReveal==='function')initReveal();},80);
+  if(tab==='earnings')renderLiveCards();if(tab==='plans')buildDashPlans();if(tab==='withdrawal'){renderSavedNums();renderWdHist();}if(tab==='referral')renderReferral();window.scrollTo(0,0);
 }
 
 function calcWdFee(){const amt=parseFloat(document.getElementById('wdAmount').value)||0;const fee=amt*0.2;document.getElementById('wdAmt').textContent=amt.toFixed(0);document.getElementById('wdFee').textContent=fee.toFixed(0);document.getElementById('wdReceive').textContent=(amt-fee).toFixed(0);document.getElementById('wdFeePreview').style.display=amt>0?'block':'none';}
