@@ -168,8 +168,8 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
 .msg.success{background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.25);color:var(--green)}
 .msg.error{background:rgba(240,64,96,.09);border:1px solid rgba(240,64,96,.25);color:var(--danger)}
 .field-err{color:var(--danger);font-size:.69rem;margin-top:3px}
-#page-dashboard{background:var(--navy);padding-top:var(--nav-h)}
-.dash-content{padding:13px;padding-bottom:calc(var(--bottom-h)+13px)}
+#page-dashboard{background:var(--navy);padding-top:var(--nav-h);overflow-y:auto;height:100vh}
+.dash-content{padding:13px;padding-bottom:calc(var(--bottom-h)+120px)}
 .dash-tab{display:none}
 .dash-tab.active{display:block}
 .balance-card{background:linear-gradient(135deg,var(--navy-light) 0%,var(--navy-card) 100%);border:1px solid rgba(245,197,24,.18);border-radius:18px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
@@ -750,7 +750,7 @@ footer p{color:var(--gray);font-size:.75rem;line-height:1.8}
     </div>
 
     <!-- PROFILE TAB -->
-    <div id="tab-profile" class="dash-tab">
+    <div id="tab-profile" class="dash-tab" style="overflow-y:auto;padding-bottom:120px">
       <div class="profile-header">
         <div class="profile-avatar">👤</div>
         <div class="profile-name" id="profileName">-</div>
